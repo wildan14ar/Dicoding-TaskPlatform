@@ -14,19 +14,21 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(),
-              const SizedBox(height: 20),
-              _buildFeaturesGrid(),
-              const SizedBox(height: 20),
-              _buildContactSection(),
-              const SizedBox(height: 30),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                const SizedBox(height: 20),
+                _buildFeaturesGrid(),
+                const SizedBox(height: 20),
+                _buildContactSection(),
+                const SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
@@ -72,6 +74,7 @@ class HomePage extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
+      childAspectRatio: 0.8, // Adjusted to make the card taller
       physics: const NeverScrollableScrollPhysics(),
       children: [
         _buildFeatureCard(
@@ -127,11 +130,14 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Text(
-              description,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.black54,
+            Expanded(
+              // Ensures that text can occupy available space
+              child: Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black54,
+                ),
               ),
             ),
           ],
